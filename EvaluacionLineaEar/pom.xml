@@ -1,0 +1,57 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+  	  <relativePath>../EvaluacionMaster/pom.xml</relativePath>
+	  <groupId>EvaluacionMaster</groupId>
+	  <artifactId>EvaluacionMaster</artifactId>
+	  <version>0.0.1-SNAPSHOT</version>
+  </parent>
+  
+  <groupId>EvaluacionLineaEar</groupId>
+  <artifactId>EvaluacionLineaEar</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>ear</packaging>
+  
+ <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>2.0.2</version>
+        <configuration>
+          <source>1.6</source>
+          <target>1.6</target>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-ear-plugin</artifactId>
+        <version>2.4</version>
+        <configuration>
+            <version>6</version>
+        </configuration>
+      </plugin>
+    </plugins>
+    <finalName>EvaluacionLineaEar</finalName>
+  </build>
+  
+
+  <dependencies>
+         
+         <dependency>
+  			 		<groupId>EvaluacionlineaEJB</groupId>
+  					<artifactId>EvaluacionlineaEJB</artifactId>
+  					<version>0.0.1-SNAPSHOT</version>
+  					<scope>compile</scope>
+         </dependency>
+         <dependency>
+         	<groupId>EvaluacionLineaWeb</groupId>
+         	<artifactId>EvaluacionLineaWeb</artifactId>
+         	<version>1.0-SNAPSHOT</version>
+         	<type>war</type>
+         	<scope>compile</scope>
+         </dependency>
+  </dependencies>
+  
+  
+</project>
