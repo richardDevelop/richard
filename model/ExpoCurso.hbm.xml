@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 12/05/2016 12:28:41 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.evaluacionlinea.model.ExpoCurso" table="expo_curso">
+         <composite-id name="id" class="com.evaluacionlinea.model.ExpoCursoId">
+             <key-many-to-one name="expositor" class="com.evaluacionlinea.model.Expositor">
+                <column name="exp_id" />
+            </key-many-to-one>
+              <key-many-to-one name="curso" class="com.evaluacionlinea.model.Curso">
+                <column name="cur_id" />
+            </key-many-to-one>
+        </composite-id>
+    </class>
+</hibernate-mapping>

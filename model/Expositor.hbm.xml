@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 17/04/2016 11:24:26 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+ <class name="com.evaluacionlinea.model.Expositor"
+  proxy="com.evaluacionlinea.model.Expositor" table="expositor">
+  <id name="expId" type="java.lang.Integer">
+   <column name="exp_id"/>
+   <generator class="native"/>
+  </id>
+  <property generated="never" lazy="false" name="nombre" type="java.lang.String">
+   <column name="nombre"/>
+  </property>
+  <property generated="never" lazy="false" name="activo" type="java.lang.Boolean">
+   <column name="activo"/>
+  </property>
+ </class>
+</hibernate-mapping>
