@@ -1,0 +1,100 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<p:growl id="growlCuest" life="2000" />
+</h:head>
+
+<h:body>
+
+	<ui:composition template="/masterPage.xhtml">
+		<ui:define name="contenido">
+
+			<p:fieldset legend="Expositor " style="margin-bottom:500px">
+
+				<h:form id="formulario">
+					<p:growl id="msgs" showDetail="true" />
+					<table width="100%">
+						<tr>
+							<td width="50"><p:outputLabel for="area" value="Area:" /></td>
+							<td align="left"><p:selectOneMenu id="area"
+									value="#{mbExpo.area}" style="width:29%">
+									<f:selectItem itemLabel="Selecciona" itemValue="" />
+									<f:selectItems value="#{mbExpo.lstArea}" />
+									<p:ajax event="change" update="cursoGral" process="@this"
+										listener="#{mbExpo.handleChangeAreaGral()}" />
+								</p:selectOneMenu></td>
+
+							<td width="50"><p:outputLabel for="cursoGral" value="Curso:" /></td>
+							<td align="left"><p:selectOneMenu id="cursoGral"
+									value="#{mbExpo.curId}" style="width:29%">
+									<f:selectItem itemLabel="Selecciona" itemValue="" />
+									<f:selectItems value="#{mbExpo.lstCursoItems}" />
+									<p:ajax event="change" update="tblExpo" process="@this"
+										listener="#{mbExpo.handleChangeCurso()}" />
+								</p:selectOneMenu></td>
+						</tr>
+
+					</table>
+
+					<p:dataTable id="tblExpo" var="exp" value="#{mbExpo.lstExpositor}"
+						style="margin-bottom:20px" paginator="true" rows="10"
+						paginatorPosition="bottom">
+
+						<p:column headerText="Id">
+							<h:outputText value="#{exp.expId}" />
+						</p:column>
+						<p:column headerText="Nombre Expositor">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{exp.nombre}" />
+								</f:facet>
+								<f:facet name="input">
+									<p:inputText id="nombreC" value="#{exp.nombre}"
+										style="width:100%" />
+								</f:facet>
+							</p:cellEditor>
+
+						</p:column>
+
+						<p:column headerText="Nombre Curso">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{exp.cursoVO.nombre}" />
+								</f:facet>
+								<f:facet name="input">
+									<p:inputText id="nombre" value="#{exp.cursoVO.nombre}"
+										style="width:100%" />
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+
+						<p:column headerText="Activo">
+							<p:cellEditor>
+								<f:facet name="output">
+									<p:selectBooleanCheckbox value="#{exp.activo}" />
+								</f:facet>
+								<f:facet name="input">
+									<p:selectBooleanCheckbox id="modelInputCorr"
+										value="#{exp.activo}" />
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+
+					</p:dataTable>
+					
+					<p:fileUpload fileUploadListener="#{mbExpo.handleFileUpload}"
+					mode="advanced" update="msgs" auto="true"
+					label="Cargar Expositores" />
+					
+				</h:form>
+			</p:fieldset>
+		</ui:define>
+	</ui:composition>
+
+</h:body>
+</html>

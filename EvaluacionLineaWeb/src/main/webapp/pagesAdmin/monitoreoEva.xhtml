@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:body>
+	<ui:composition template="/masterPage.xhtml">
+		<ui:define name="contenido">
+			<h:form id="frmPrincipal">
+				<p:fieldset legend="Monitoreo">
+					<p:wizard id="wzMonitor" flowListener="#{MbMonitoreo.onFlowProcess}">
+        				<p:tab id="Evaluacion" title="Evaluacion" titleStyle="display:none">
+        					<table width="100%">
+								<tr>
+									<td width="50"><p:outputLabel for="area" value="Area:" /></td>
+									<td align="left">
+										<p:selectOneMenu id="area" value="#{MbMonitoreo.areaId}" >
+								            <f:selectItem itemLabel="-- Seleccione --" itemValue="" />
+								            <f:selectItems value="#{MbAreas.listaAreas}"/>
+								            <p:ajax event="change" update="evaSeleccionada" process="@this" listener="#{MbMonitoreo.BuscarEvaluacionesByAreaId}"/>
+								        </p:selectOneMenu>
+									</td>
+								</tr>
+							</table>
+							<p:spacer height="10"/>
+							<h:panelGroup id="evaSeleccionada">
+					            <p:dataTable id="tblEvaluaciones" value="#{MbMonitoreo.lstEvaluaciones}" var="eva" 
+					            	paginator="true" rows="20" paginatorPosition="bottom" 
+					            	selection="#{MbMonitoreo.selectedEvaluacion}"
+									rowKey="#{eva.evaId}">
+									<p:column headerText="Seleccionar" 
+										selectionMode="single" width="100"
+										style="text-align:center" />	            	
+					            	<p:column headerText="ID" width="50">
+					            		<div width="100%" align="center">
+								        	<h:outputText value="#{eva.evaId}"/>
+								        </div>
+								    </p:column>
+								    <p:column headerText="Evaluacion">
+								        <h:outputText value="#{eva.nombre}"/>
+								    </p:column>	
+								    <p:column headerText="Sede" width="120">
+								        <h:outputText value="#{eva.sede}"/>
+								    </p:column>
+								    <p:column headerText="Grupo" width="120">
+								        <h:outputText value="#{eva.grupo}"/>
+								    </p:column>
+								    <p:column headerText="Fecha y Hora Inicio">
+								    	<div width="100%" align="center">
+								        	<h:outputText value="#{eva.finiAplicacion}"/>
+								        </div>
+								    </p:column>
+								    <p:column headerText="Fecha y Hora Termino">
+								    	<div width="100%" align="center">
+								        	<h:outputText value="#{eva.ffinAplicacion}"/>
+								        </div>
+								    </p:column>
+								    <p:column headerText="Duración (hh:mm)" width="80" >
+								    	<div width="100%" align="center">
+     										<h:outputText value="#{eva.duracion}">
+								                <f:convertDateTime type="time" pattern="HH:mm" timeZone="#{MbMonitoreo.timeZone}"/>
+								            </h:outputText>
+								        </div>
+								    </p:column>
+								    <p:column headerText="Estatus">
+								    	<div width="100%" align="center">
+								        	<h:outputText value="#{eva.estatus}"/>
+								        </div>
+								    </p:column>
+								</p:dataTable>
+					        </h:panelGroup>
+        				</p:tab>
+        				<p:tab id="MonitoreaEva" title="Monitor" titleStyle="display:none">
+        					<table width="100%">
+								<tr>
+									<td>
+										<table width="100%">
+											<tr>
+												<td align="right" width="5%">													
+													<h3>Evaluación:</h3>													
+												</td>
+												<td align="left" width="15%">
+													<p:outputLabel value="#{MbMonitoreo.selectedEvaluacion.nombre}" />
+												</td>
+												<td width="75%" align="center">
+													<table width="50%">													
+														<tr>
+															<td align="right"><p:outputLabel value="Concluida" /></td>
+															<td align="left"><p:graphicImage id="img1" value="../img/finalizo.png" cache="false"/></td>
+															
+															<td align="right"><p:outputLabel value="En proceso" /></td>
+															<td align="left"><p:graphicImage id="img2" value="../img/enProceso.png" cache="false"/></td>
+															
+															<td align="right"><p:outputLabel value="No ha ingresado" /></td>
+															<td align="left"><p:graphicImage id="img3" value="../img/noIngreso.png" cache="false"/></td>
+														</tr>
+													</table>
+												</td>
+												<td align="right"  width="5%">
+													<p:commandButton actionListener="#{MbMonitoreo.getMonitoreoEva}"  
+														icon="ui-icon-refresh" title="Buscar" update="resultMonitorEva"/>
+												</td>
+											</tr>
+										</table>
+									</td>
+								</tr>
+							</table>						
+					        <h:panelGroup id="resultMonitorEva">
+					            <p:dataTable id="tblEvaluacion" value="#{MbMonitoreo.lstMonitoreoEva}" var="monEva"  widgetVar="$tblEvaluacion"
+					            	paginator="true" rows="20" paginatorPosition="bottom" filteredValue="#{MbMonitoreo.filteredlstPersonas}">
+					            	<f:facet name="header">
+					            	 	<div align="right">
+					                    <p:outputPanel>
+					                        <h:outputText value="Busqueda:" />
+					                        <p:inputText id="globalFilter" onkeyup="PF('$tblEvaluacion').filter()" style="width:150px; margin-left: 10px;" />
+					                    </p:outputPanel>
+					                    </div>
+					                </f:facet>
+					            	<p:column headerText="ID" width="50" style="text-align: center">
+							        	<h:outputText value="#{monEva.perId}"/>
+								    </p:column>
+								    <p:column headerText="Nombre" filterBy="#{monEva.nombre} #{monEva.apePaterno} #{monEva.apeMaterno}" filterStyle="display:none; visibility:hidden;">
+								        <h:outputText value="#{monEva.nombre} #{monEva.apePaterno} #{monEva.apeMaterno}"/>
+								    </p:column>
+								    <p:column headerText="GNP" width="120" filterBy="#{monEva.numEmpleado}" filterStyle="display:none; visibility:hidden;">
+								        <h:outputText value="#{monEva.numEmpleado}"/>
+								    </p:column>
+								    <p:column headerText="Usuario" filterBy="#{monEva.usuario}"  filterStyle="display:none; visibility:hidden;">
+								        <h:outputText value="#{monEva.usuario}"/>
+								    </p:column>
+								    <p:column headerText="Nivel" width="120" style="text-align: center">
+								        <h:outputText value="#{monEva.nivel}"/>
+								    </p:column>
+								    <p:column headerText="Estatus Evaluacion" width="100" style="text-align: center">
+						    			<p:graphicImage id="image" value="../img/#{monEva.imgEnCurso}" cache="false"/>
+								    </p:column>
+								    <p:column headerText="Bloque" width="70" style="text-align: center">
+							        	<h:outputText value="#{monEva.bloque}"/>
+								    </p:column>
+								    <p:column headerText="Tiempo (hh:mm:ss)" style="text-align: center">
+							        	<h:outputText value="#{monEva.tiempoEnRealizar}"/>
+								    </p:column>
+								    <p:column headerText="Calificacion" width="80" style="text-align: center">
+							        	<h:outputText value="#{monEva.calificacion}"/>
+								    </p:column>								    
+								    <p:column headerText="Aprobo" width="70" style="text-align: center">
+							        	<p:graphicImage id="image2" value="../img/#{monEva.imgEvaTermino}" cache="false"/>
+								    </p:column>
+								    <p:column headerText="Aprobo" visible="false">
+							        	<h:outputText value="#{monEva.calAprobada}"/>
+								    </p:column>
+								</p:dataTable>
+								<p:spacer height="20"/>
+								<p:panel header="Exportar Información">
+									<h:commandLink>
+								        <p:graphicImage title="Exporta a CSV" value="../img/csv.png" width="48" height="48"/>
+								        <p:dataExporter type="csv" target="tblEvaluacion" fileName="Resultado Evaluacion" pageOnly="true" />
+								    </h:commandLink>
+							    </p:panel>
+					        </h:panelGroup>
+        				</p:tab>
+        			</p:wizard>
+        			<p:blockUI block="wzMonitor" trigger="area,wzMonitor">
+					        CARGANDO....<br />
+					        <p:graphicImage value="../loading/ajax-loader.gif"/>
+				    </p:blockUI>
+			    </p:fieldset>
+		    </h:form>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

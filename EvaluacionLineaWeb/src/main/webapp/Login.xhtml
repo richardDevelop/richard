@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">	
+    <h:head>
+        <title>Vector</title>
+        <link rel="stylesheet" href="/EvaluacionLineaWeb/css/cssLogin.css" />
+    </h:head>
+    <h:body>
+    	<div id="login_form">
+			<div class="div1">Servicios de Evaluacion Electronica  </div>
+            <div class="div2"></div>
+			<div class="div3"></div>
+            <h:form name="f1" id="f1" class="f1">
+				<div align="center" style = " margin-top: 3%;">
+                <table>
+                    <tr>
+                        <td class="f1_label">
+                        	<p><h:outputLabel for="usuario" value="Usuario:"/></p>
+                       	</td>
+                        <td>
+                        	<p:inputText id="usuario" value="#{MbLogin.usuario}" required="true" label="usuario"/>
+                        </td>
+						<td></td>
+						<td></td>
+                    </tr>
+                    <tr>
+                        <td class="f1_label">
+                        	<p><h:outputLabel for="password" value="Clave:"/></p>
+                        </td>
+                        <td>
+                        	<p:password id="password" value="#{MbLogin.passowrd}" required="true" label="password"/>
+                       	</td>
+						<td></td>
+						<td>
+                            
+				    			<h:commandButton value="Entrar" action="#{MbLogin.login()}"/>
+				    		
+                        </td>
+                    </tr>
+                </table>
+				</div>
+            </h:form>
+			<div class="div4">
+			<table>
+				<tr>
+					<td>
+						<p:graphicImage value="img/imagen-slider-03.jpg" width="200" height="150"/>
+					</td>
+					<td width="10px"></td>
+					<td>
+						<h3>Bienvenidos a los nuevos Servicios de Educacion</h3>
+						Te damos la mas cordial bienvenida a los
+						nuevos servicios de evaluacion electronica que EY ha desarrollado para ti.
+					</td>
+					<td width="30px"></td>
+					<td>
+						<p:graphicImage value="img/imagen-slider-02.jpg" width="200" height="150"/>
+					</td>
+					<td width="10px"></td>
+					<td>
+						<h3>Para acceder a estos servicios</h3>
+						Deberas usar tu direccion de correo electronico como nombre de usuario y la clave que fue enviada a tu correo
+					</td>
+				</tr>
+			</table>
+			</div>
+			<div class="div3"></div>
+			<div class="div5"></div>
+        </div>  
+    </h:body>
+</html>

@@ -1,0 +1,186 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<p:growl id="growl" life="2000" />
+</h:head>
+
+<h:body>
+
+<ui:composition template="/masterPage.xhtml">
+		<ui:define name="contenido">
+			<p:fieldset legend="Edicion Evaluacion" style="margin-bottom:500px">
+				<h:form>
+					<table>
+					<tr>
+							<td width="160"><h:outputText value="Nombre Evaluacion" /></td>
+							<td width="150">
+							<p:inputText value="#{mbEvaEdit.eval.nombre}" style="width:270px"/>
+							</td>
+							<td width="25"/>
+							<td width="150"><h:outputText value="Sede" /></td>
+							<td width="150">
+							<p:inputText id="sede" 
+					           value="#{mbEvaEdit.eval.sede}" style="width:270px"/> 
+							</td>
+							<td width="25"/>
+							<td width="150"><h:outputText value="Calificacion Aprob" /></td>
+							<td width="150">
+							<p:inputText id="calAprob" 
+					           value="#{mbEvaEdit.eval.calApro}" style="width:270px"/> 
+							</td>
+							<td width="25"/>
+							<td width="150"><h:outputText value="Activo" /></td>
+							<td width="50">
+							<p:selectBooleanCheckbox id="estatus"  
+					           value="#{mbEvaEdit.eval.activo}"  style="width:10px"/>
+							</td>
+						</tr>
+						<tr>
+						<td height= "45"/>
+						</tr>
+						<tr>
+							<td width="160"><h:outputText value="Grupo" /></td>
+							<td width="150">
+							<p:inputText value="#{mbEvaEdit.eval.grupo}" style="width:270px"/>
+							</td>
+							<td width="25"/>
+							<td width="150"><h:outputText value="Duracion" /></td>
+							<td width="150">
+							<p:calendar id="time" pattern="HH:mm" timeOnly="true"
+					          value="#{mbEvaEdit.eval.duracion}" />
+							</td>
+							<td width="25"/>
+							<td width="150"><h:outputText value="Fecha Aplicacion" /></td>
+							<td width="150">
+							<p:calendar id="fechAp"
+					          value="#{mbEvaEdit.eval.inFechAp}" />
+							</td>
+							<td width="25"/>
+							<td width="150"><h:outputText value="Hora Aplicacion" /></td>
+							<td width="150">
+							<p:calendar id="timeApp" pattern="HH:mm" timeOnly="true"
+					          value="#{mbEvaEdit.eval.hrApIniDa}" />
+							</td>
+						</tr>
+						<tr>
+						<td height= "45"/>
+						</tr>
+						<tr>
+							<td width="150"><h:outputText value="Fecha Aplicacion Final " /></td>
+							<td width="150">
+							<p:calendar id="fechApFin"
+					          value="#{mbEvaEdit.eval.finFechAp}" />
+							</td>
+							<td width="25"/>
+							<td width="150"><h:outputText value="Hora Aplicacion Final" /></td>
+							<td width="150">
+							<p:calendar id="timeFimApp" pattern="HH:mm" timeOnly="true"
+					          value="#{mbEvaEdit.eval.hrApFinDa}" />
+							</td>
+							
+							
+							<td width="25"/>
+							<td width="150"><h:outputText value="Mostrar Resultado" /></td>
+							<td width="50">
+							<p:selectBooleanCheckbox id="pdf"  
+					           value="#{mbEvaEdit.eval.pdf}" style="width:10px"/>
+							</td>
+						</tr>
+						<tr>
+						<td height= "25"/>
+						</tr>
+					<tr>
+					<td>
+					<p:commandButton value="Guardar" update="growl" ajax="false"/>
+				   </td>
+					</tr>
+					</table>
+				<p:panel header="Usuarios ">
+				 <p:dataTable id="tblusuario" var="usuario"
+		value="#{mbEvaEdit.lstPersona}" paginator="true" rows="10"
+		style="margin-bottom:20px"
+		paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}">
+		<f:facet name="{Exporters}">
+			<h:commandLink>
+				<p:graphicImage name="../img/cvs.jpg" width="24" />
+				<p:dataExporter type="csv" target="tblusuario" fileName="usuarios"
+					pageOnly="false" />
+			</h:commandLink>
+		</f:facet>
+		<p:column headerText="Nombre">
+		<p:cellEditor>
+			<f:facet name="output">
+				<h:outputText value="#{usuario.nombre}" />
+			</f:facet>
+			<f:facet name="input">
+			<h:inputText id="nomUsu" value="#{usuario.nombre}" />
+			</f:facet>
+			</p:cellEditor>
+		</p:column>
+		
+			<p:column headerText="Correo">
+			<p:cellEditor>
+				<f:facet name="output">
+					<h:outputText value="#{usuario.email}" />
+				</f:facet>
+				<f:facet name="input">
+					<h:inputText id="mail" value="#{usuario.email}" />
+				</f:facet>
+			</p:cellEditor>
+		</p:column>
+
+		<p:column headerText="Passwoord">
+			<p:cellEditor>
+				<f:facet name="output">
+					<h:outputText value="#{usuario.users.password}" />
+				</f:facet>
+				<f:facet name="input">
+					<h:inputText id="pass" value="#{usuario.users.password}" />
+				</f:facet>
+			</p:cellEditor>
+		</p:column>
+
+		<p:column headerText="GPN">
+			<p:cellEditor>
+				<f:facet name="output">
+					<h:outputText value="#{usuario.numEmpleado}" />
+				</f:facet>
+				<f:facet name="input">
+					<h:inputText id="gpn" value="#{usuario.numEmpleado}" />
+				</f:facet>
+			</p:cellEditor>
+		</p:column>
+	
+
+		<p:column headerText="Estatus">
+			<p:cellEditor>
+				<f:facet name="output">
+					<p:selectBooleanCheckbox id="usero"  
+					           value="#{usuario.activo}" style="width:10px"/> 
+				</f:facet>
+				<f:facet name="input">
+					<p:selectBooleanCheckbox id="user"  
+					           value="#{usuario.activo}" style="width:10px"/>
+					
+				</f:facet>
+			</p:cellEditor>
+		</p:column>
+	
+	</p:dataTable>
+	<p:commandButton label="Responsiva" value="Responsiva" ajax="false"
+						actionListener="#{mbEvaEdit.generatePdf}" />
+				
+				</p:panel>
+				
+				</h:form>
+			</p:fieldset>
+		</ui:define>
+	</ui:composition>
+
+</h:body>
+</html>

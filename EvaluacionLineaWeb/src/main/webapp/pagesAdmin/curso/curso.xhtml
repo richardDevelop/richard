@@ -1,0 +1,26 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+
+</h:head>
+
+<h:body>
+     <ui:composition template="/masterPage.xhtml">
+          <ui:define name="contenido">
+
+          <p:fieldset legend="Admin Evaluacion" style="margin-bottom:500px">
+		
+		<p:outputPanel id="outp">
+		 <ui:include src="#{dtEvaluadosListView.pageRedi}" ></ui:include>
+		</p:outputPanel>
+   </p:fieldset>
+		</ui:define>
+	</ui:composition>
+
+</h:body>
+</html>

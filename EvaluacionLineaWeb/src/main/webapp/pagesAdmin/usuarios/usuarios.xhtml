@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:body>
+	<ui:composition template="/masterPage.xhtml">
+		<ui:define name="contenido">
+			<script type="text/javascript" language="javascript">
+			      function copiaUsuario(){
+			    	  document.getElementById("frmPrincipal:usuario").value = document.getElementById("frmPrincipal:email").value;
+			      }
+			</script>
+			<h:form id="frmPrincipal">
+				<p:fieldset legend="Usuarios">
+					<p:panel id="panb" widgetVar="panb">
+					<table width="100%">
+						<tr>
+							<td width="50"><p:outputLabel for="area" value="Area:" /></td>
+							<td align="left">
+								<p:selectOneMenu id="area" widgetVar="area" value="#{MbPersona.areaId}">
+						            <f:selectItem itemLabel="-- Seleccione --" itemValue="" />
+						            <f:selectItems value="#{MbAreas.listaAreas}"/>
+						            <p:ajax onstart="PF('asd').show();" oncomplete="PF('asd').hide();" event="change" update=":frmPrincipal:areaSeleccionada" process="@this" listener="#{MbPersona.BuscarPersonasByAreaId}"/>
+						        </p:selectOneMenu>
+							</td>
+						</tr>
+					</table>						
+			        <h:panelGroup id="areaSeleccionada">
+			            <p:dataTable id="tblUsuarios" value="#{MbPersona.lstPersonas}" var="usuario" widgetVar="$tblUsuarios"
+			            	paginator="true" rows="20" paginatorPosition="bottom" filteredValue="#{MbPersona.filteredlstPersonas}">
+			            	 <f:facet name="header">
+			            	 	<div align="right">
+			                    <p:outputPanel>
+			                        <h:outputText value="Busqueda:" />
+			                        <p:inputText id="globalFilter" onkeyup="PF('$tblUsuarios').filter()" style="width:150px; margin-left: 10px;" />
+			                    </p:outputPanel>
+			                    </div>
+			                </f:facet>
+			            	<p:column headerText="ID" width="50">
+						        <h:outputText value="#{usuario.perId}"/>
+						    </p:column>
+						    <p:column headerText="Nombre" filterBy="#{usuario.nombre} #{usuario.apePaterno} #{usuario.apeMaterno}" filterStyle="display:none; visibility:hidden;">
+						    	<f:facet name="header">  
+						                <h:outputText value="Nombre"/>  
+						         </f:facet>
+						        <h:outputText value="#{usuario.nombre} #{usuario.apePaterno} #{usuario.apeMaterno}"/>
+						    </p:column>				 
+<!-- 						    <p:column headerText="A.Paterno"> -->
+<!-- 						        <h:outputText value="#{usuario.apePaterno}"/> -->
+<!-- 						    </p:column>				     -->
+<!-- 						    <p:column headerText="A.Materno"> -->
+<!-- 						        <h:outputText value="#{usuario.apeMaterno}"/> -->
+<!-- 						    </p:column> -->
+						    <p:column headerText="GPN" width="120" filterBy="#{usuario.numEmpleado}" filterStyle="display:none; visibility:hidden;">						    	
+						        <h:outputText value="#{usuario.numEmpleado}"/>
+						    </p:column>
+						    <p:column headerText="Email" filterBy="#{usuario.email}" filterStyle="display:none; visibility:hidden;">
+						        <h:outputText value="#{usuario.email}"/>
+						    </p:column>
+						    <p:column headerText="Usuario">
+						        <h:outputText value="#{usuario.usersVO.usuario}"/>
+						    </p:column>
+						    <p:column headerText="Clave">
+						        <h:outputText value="#{usuario.usersVO.password}"/>
+						    </p:column>
+						    <p:column headerText="Nivel" width="70">
+						        <h:outputText value="#{usuario.nivelVO.nivel}"/>
+						    </p:column>
+						    <p:column headerText="Modificar" width="80" style="float:center">
+						    	<div width="100%" align="center">
+						    		<p:commandLink update=":frmPrincipal:usuarioPanel" oncomplete="PF('usuarioDialog').show()" title="Ver Detalle" styleClass="ui-icon ui-icon-pencil">
+						                <f:setPropertyActionListener value="#{usuario}" target="#{MbPersona.selectedPersona}" />
+						            </p:commandLink>
+						    	</div>						    	
+						    </p:column>
+						</p:dataTable>
+						<table width="100%">
+							<tr>
+								<td>
+									<p:commandButton action="#{MbPersona.nuevaPersona}" oncomplete="PF('usuarioDialog').show()" value="Nuevo" 
+										id="iconOnly" update=":frmPrincipal:usuarioPanel" title="Nuevo" />
+								</td>
+							</tr>
+						</table>						
+						
+						
+						<p:confirmDialog id="confirmaEliminar" message="¿Está usted seguro de eliminar al usuario? #{MbPersona.selectedPersona.nombre}"
+					                        header="Esperando confirmacion"
+					                        severity="alert" widgetVar="confirmDialog">
+					        <p:commandButton value="SI" action="#{MbPersona.doElimina}" oncomplete="PF('confirmDialog').hide()"/>			        
+					        <p:commandButton value="NO" onclick="PF('confirmDialog').hide();" type="button" />
+					    </p:confirmDialog>
+					    
+					    <p:dialog id="dialog" header="Usuario" showEffect="fade" widgetVar="usuarioDialog" modal="true" resizable="false">
+					        <p:outputPanel id="usuarioPanel">
+					        	<table>
+					        		<tr>
+					        			<td><h:outputLabel for="perId" value="ID: " /></td>
+					        			<td><h:outputLabel id="perId" value="#{MbPersona.selectedPersona.perId}"/></td>
+					        		</tr>
+					        		<tr>
+					        			<td><h:outputLabel for="menuArea" value="Area:" /></td>
+					        			<td>
+					        				 <p:selectCheckboxMenu id="menuArea" value="#{MbPersona.selectedAreas}" label="Areas"
+										                          filter="true" filterMatchMode="startsWith" panelStyle="width:250px">
+										        <f:selectItems value="#{MbAreas.listaAreas}"/>
+										    </p:selectCheckboxMenu>
+					        			</td>
+					        		</tr>			        		
+					        		<tr>
+					        			<td><h:outputLabel for="nombre" value="Nombre: " /></td>
+					        			<td>
+					        				<h:inputText id="nombre" value="#{MbPersona.selectedPersona.nombre}" onkeyup="this.value=this.value.toUpperCase();"/>
+					        			</td>
+					        		</tr>
+					        		<tr>
+					        			<td><h:outputLabel for="apePaterno" value="A. Paterno: " /></td>
+					        			<td>
+					        				<h:inputText id="apePaterno" value="#{MbPersona.selectedPersona.apePaterno}" onkeyup="this.value=this.value.toUpperCase();"/>
+				        				</td>
+					        		</tr>
+					        		<tr>
+					        			<td><h:outputLabel for="apeMaterno" value="A. Materno: " /></td>
+					        			<td><h:inputText id="apeMaterno" value="#{MbPersona.selectedPersona.apeMaterno}" onkeyup="this.value=this.value.toUpperCase();"/></td>
+					        		</tr>
+					        		<tr>
+					        			<td><h:outputLabel for="numEmpleado" value="GNP: " /></td>
+					        			<td>
+					        				<h:inputText id="numEmpleado" value="#{MbPersona.selectedPersona.numEmpleado}" onkeyup="this.value=this.value.toUpperCase();">
+				        					</h:inputText>
+					        			</td>
+					        		</tr>
+					        		<tr>
+					        			<td><h:outputLabel for="email" value="Email: " /></td>
+					        			<td>
+					        				<h:inputText id="email" value="#{MbPersona.selectedPersona.email}" onblur="copiaUsuario();">
+					        				</h:inputText>
+					        			</td>
+					        		</tr>
+					        		<tr>
+					        			<td><h:outputLabel for="usuario" value="Usuario: " /></td>
+					        			<td>
+					        				<h:inputText id="usuario" value="#{MbPersona.selectedPersona.usersVO.usuario}"/>
+					        			</td>
+					        		</tr>
+					        		<tr>
+					        			<td><h:outputLabel id="password" for="password" value="Password: " /></td>
+					        			<td>
+					        				<h:inputText value="#{MbPersona.selectedPersona.usersVO.password}" />			        				
+					        			</td>
+					        		</tr>
+					        		<tr>
+					        			<td><h:outputLabel for="nivId" value="Nivel: " /></td>
+					        			<td>
+					        				<p:selectOneMenu id="nivId" value="#{MbPersona.selectedPersona.nivelVO.nivId}" >
+									            <f:selectItem itemLabel="-- Seleccione --" itemValue="" />
+									            <f:selectItems value="#{MbNiveles.listaNiveles}"/>
+									        </p:selectOneMenu>
+					        			</td>
+					        		</tr>
+					        		<tr>
+					        			<td><h:outputLabel for="menuPerfil" value="Perfil Sistema:" /></td>
+					        			<td>
+					        				 <p:selectCheckboxMenu id="menuPerfil" value="#{MbPersona.selectedPerfiles}" label="Perfil"
+										                          filter="true" filterMatchMode="startsWith" panelStyle="width:250px">
+										        <f:selectItems value="#{MbPerfil.listaPerfiles}"/>
+										    </p:selectCheckboxMenu>
+					        			</td>
+					        		</tr>
+					        		<tr>
+					        			<td><h:outputLabel for="activo" value="Activo: " /></td>
+					        			<td><h:selectBooleanCheckbox id="activo" value="#{MbPersona.selectedPersona.activo}"/></td>
+					        		</tr>
+					        		<tr>
+					        			<td colspan="2" align="right">
+					        				<h:commandButton id="btnGuardar" value="Guardar" action="#{MbPersona.doGuardar}" />
+					        			</td>
+					        		</tr>
+					        	</table>			            
+					        </p:outputPanel>
+					    </p:dialog>
+			        </h:panelGroup>
+			        </p:panel>
+						<p:blockUI block="panb" trigger="area" widgetVar="asd">
+							CARGANDO....<br />
+					        <p:graphicImage value="../../loading/ajax-loader.gif"/>
+						</p:blockUI>
+			    </p:fieldset>
+		    </h:form>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

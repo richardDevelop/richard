@@ -1,0 +1,143 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<p:growl id="growlCuest" life="2000" />
+</h:head>
+
+<h:body>
+
+	<ui:composition template="/masterPage.xhtml">
+		<ui:define name="contenido">
+
+			<p:fieldset legend="Cuestionarios Especiales"
+				style="margin-bottom:500px">
+
+				<h:form id="formulario">
+					<p:growl id="msgs" showDetail="true" />
+					<table width="100%">
+						<tr>
+							<td width="50"><p:outputLabel for="tipoCues"
+									value="Tipo Cuestionario :" /></td>
+							<td align="left"><p:selectOneMenu id="tipoCues"
+									value="#{mbEvaEsp.tipoCursoId}" style="width:29%">
+									<f:selectItem itemLabel="Selecciona" itemValue="" />
+									<f:selectItems value="#{mbEvaEsp.lstTipoCuest}" />
+									<p:ajax event="change" update="tblCuestionarios"
+										process="@this" listener="#{mbEvaEsp.handleChangeTipoCues()}" />
+								</p:selectOneMenu></td>
+						</tr>
+
+					</table>
+
+					<p:dataTable id="tblCuestionarios" var="cuest"
+						value="#{mbEvaEsp.lstCuestionarioVO}" style="margin-bottom:20px"
+						paginator="true" rows="10" paginatorPosition="bottom"
+						selection="#{mbEvaEsp.cuestionarioVO}" rowKey="#{cuest.cueId}">
+
+						<p:column selectionMode="single"
+							style="width:16px;text-align:center" />
+
+						<p:column headerText="Id">
+							<h:outputText value="#{cuest.cueId}" />
+						</p:column>
+						<p:column headerText="Nombre Cuestionario">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{cuest.nombre}" />
+								</f:facet>
+								<f:facet name="input">
+									<p:inputText id="nombreC" value="#{cuest.nombre}"
+										style="width:100%" />
+								</f:facet>
+							</p:cellEditor>
+
+						</p:column>
+
+
+
+						<p:column headerText="Estatus">
+							<p:cellEditor>
+								<f:facet name="output">
+									<p:selectBooleanCheckbox id="usero" value="#{cuest.activo}"
+										style="width:10px" />
+								</f:facet>
+								<f:facet name="input">
+									<p:selectBooleanCheckbox id="user" value="#{cuest.activo}"
+										style="width:10px" />
+
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+
+						<f:facet name="footer">
+							<p:commandButton process="tblCuestionarios" icon="ui-icon-search"
+								value="Modificar" oncomplete="PF('dlgCarga').show()"/>
+						</f:facet>
+
+					</p:dataTable>
+
+
+
+					<p:commandButton label="Nuevo" value="Nuevo"
+						oncomplete="PF('dlgCuesEsp').show()">
+					</p:commandButton>
+
+					<p:dialog header="Nuevo Cuestionario" widgetVar="dlgCuesEsp"
+						resizable="false">
+
+						<h:panelGrid columns="2" cellpadding="5">
+
+
+
+							<h:outputLabel for="cuestiNom" value="Nombre Cuestionario" />
+							<p:inputText id="cuestiNom" required="true"
+								label="Nombre Cuestionario" style="width:80%"
+								value="#{mbEvaEsp.nombre}" />
+
+
+							<h:outputLabel for="activo" value="Activo" />
+							<p:selectBooleanCheckbox id="activo" value="#{mbEvaEsp.activo}"
+								style="width:10px" />
+
+							<p:outputLabel for="tipoCuesAlta" value="Tipo Cuestionario : " />
+							<p:selectOneMenu id="tipoCuesAlta"
+								value="#{mbEvaEsp.tipoCursoId}" style="width:29%">
+								<f:selectItem itemLabel="Selecciona" itemValue="" />
+								<f:selectItems value="#{mbEvaEsp.lstTipoCuest}" />
+								<p:ajax event="change" update="tblCuestionarios" process="@this"
+									listener="#{mbEvaEsp.handleChangeTipoCuesTipo()}" />
+							</p:selectOneMenu>
+
+
+							<f:facet name="footer">
+								<p:commandButton value="Guardar" update="growlCuest"
+									ajax="false" actionListener="#{mbEvaEsp.guardarCuest}" />
+							</f:facet>
+						</h:panelGrid>
+
+					</p:dialog>
+					<p:dialog header="Cargar Cuestionario" widgetVar="dlgCarga"
+						resizable="false">
+
+						<h:panelGrid columns="2" cellpadding="5">
+
+							<p:fileUpload
+								fileUploadListener="#{mbEvaEsp.handleFileUploadCues}"
+								mode="advanced" update="msgs" auto="true"
+								label="Cargar Cuestionario" required="true" />
+
+						</h:panelGrid>
+
+					</p:dialog>
+				</h:form>
+			</p:fieldset>
+		</ui:define>
+	</ui:composition>
+
+</h:body>
+</html>

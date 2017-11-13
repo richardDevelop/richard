@@ -1,0 +1,143 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<p:growl id="growlCuest" life="2000" />
+</h:head>
+
+<h:body>
+
+	<ui:composition template="/masterPage.xhtml">
+		<ui:define name="contenido">
+
+			<p:fieldset legend="Cuestionario" style="margin-bottom:500px">
+
+				<h:form id="formulario">
+					<p:growl id="msgs" showDetail="true" />
+					<table width="100%">
+						<tr>
+							<td width="50"><p:outputLabel for="area" value="Area:" /></td>
+							<td align="left"><p:selectOneMenu id="areaGral"
+									value="#{mbCuestionario.areaIdGral}" style="width:29%">
+									<f:selectItem itemLabel="Selecciona" itemValue="" />
+									<f:selectItems value="#{MbAreas.listaAreas}" />
+									<p:ajax event="change" update="tblCuest" process="@this"
+										listener="#{mbCuestionario.handleChangeAreaGral()}" />
+								</p:selectOneMenu></td>
+						</tr>
+					</table>
+
+					<p:dataTable id="tblCuest" var="cuest"
+						value="#{mbCuestionario.lstCuestionario}"
+						style="margin-bottom:20px" paginator="true" rows="10"
+						paginatorPosition="bottom" selection="#{mbCuestionario.cueId}"
+						rowKey="#{cuest.cueId}">
+
+						<p:column selectionMode="single"
+							style="width:16px;text-align:center" />
+						<p:column headerText="Id">
+							<h:outputText value="#{cuest.cueId}" />
+						</p:column>
+						<p:column headerText="Nombre Cuestionario">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{cuest.nombre}" />
+								</f:facet>
+								<f:facet name="input">
+									<p:inputText id="nombreC" value="#{cuest.nombre}"
+										style="width:100%" />
+								</f:facet>
+							</p:cellEditor>
+
+						</p:column>
+
+						<p:column headerText="Nombre Curso">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{cuest.curso.nombre}" />
+								</f:facet>
+								<f:facet name="input">
+									<p:inputText id="nombre" value="#{cuest.curso.nombre}"
+										style="width:100%" />
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+
+						<p:column headerText="Estatus">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{cuest.estatus}" />
+								</f:facet>
+								<f:facet name="input">
+									<p:selectOneMenu id="estatus" value="#{mbCuestionario.estatus}">
+										<f:selectItems value="#{mbCuestionario.estatus}" var="esta"
+											itemLabel="#{esta}" itemValue="#{esta}" />
+									</p:selectOneMenu>
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+
+						<f:facet name="footer">
+							<p:commandButton process="tblCuest" icon="ui-icon-search"
+								value="Modificar"
+								actionListener="#{mbCuestionario.goToEditCuestPage}" />
+						</f:facet>
+
+
+					</p:dataTable>
+					<p:commandButton label="Nuevo" value="Nuevo"
+						oncomplete="PF('dlgCues').show()">
+					</p:commandButton>
+					<p:dialog header="Nuevo Cuestionario" widgetVar="dlgCues"
+						resizable="false">
+
+						<h:panelGrid columns="2" cellpadding="5">
+							<h:outputLabel for="area" value="Area" />
+							<p:selectOneMenu id="area" value="#{mbCuestionario.areaId}"
+								style="width:80%">
+
+								<f:selectItem itemLabel="Selecciona" itemValue="" />
+								<f:selectItems value="#{MbAreas.listaAreas}" />
+								<p:ajax event="change" update="curso" process="@this"
+									listener="#{mbCuestionario.handleChange()}" />
+							</p:selectOneMenu>
+
+
+							<h:outputLabel for="curso" value="curso" />
+							<p:selectOneMenu id="curso" value="#{mbCuestionario.nombreCurso}"
+								style="width:80%">
+								<f:selectItem itemLabel="Selecciona" itemValue="" />
+								<f:selectItems value="#{mbCuestionario.lstCursoItem}" />
+							</p:selectOneMenu>
+
+							<h:outputLabel for="cuestiNom" value="Nombre Cuestionario" />
+							<p:inputText id="cuestiNom" required="true"
+								label="Nombre Cuestionario" style="width:80%"
+								value="#{mbCuestionario.nombre}" />
+
+
+							<h:outputLabel for="activo" value="Activo" />
+							<p:selectOneMenu id="activo" value="#{mbCuestionario.estatus}"
+								style="width:80%">
+								<f:selectItem itemLabel="Selecciona" itemValue="" />
+								<f:selectItems value="#{mbCuestionario.lstEstatus}" />
+							</p:selectOneMenu>
+
+							<f:facet name="footer">
+								<p:commandButton value="Guardar" update="growlCuest"
+									ajax="false" actionListener="#{mbCuestionario.guardarCuest}" />
+							</f:facet>
+						</h:panelGrid>
+
+					</p:dialog>
+				</h:form>
+			</p:fieldset>
+		</ui:define>
+	</ui:composition>
+
+</h:body>
+</html>

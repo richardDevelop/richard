@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html" xml:lang="de-DE">
+  <h:head>
+  	<title>Vector</title>
+  	<link rel="stylesheet" href="/EvaluacionLineaWeb/css/style.css" />
+  	<script type="text/javascript" language="javascript">
+	  	function disableBackButton()
+		{
+	  	   window.location.hash="no-back-button";
+	  	   window.location.hash="Again-No-back-button" //chrome	  	    
+	  	   window.onhashchange=function(){window.location.hash="no-back-button";}
+		}
+  	</script>
+  	<meta http-equiv="refresh" content="#{facesContext.externalContext.sessionMaxInactiveInterval};url=#{request.contextPath}/Login.xhtml"/>
+  </h:head>
+   
+ <h:body onload="disableBackButton()">
+ 	 <ui:include src="/sessionTimeOut.xhtml" />
+     <div class="page">
+         <div class="header">
+             <ui:include src="/header.xhtml" />
+         </div>
+         
+         	<div id="main-content">
+         		<div class="content">
+		             <ui:insert name="contenido">
+		                 Default Content
+		             </ui:insert>
+	             </div>
+             </div>
+         
+         <div class="footer">
+             <ui:include src="/foot.xhtml" />
+         </div>
+     </div>
+ </h:body>
+</html>

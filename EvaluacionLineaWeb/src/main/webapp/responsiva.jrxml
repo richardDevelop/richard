@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reportResponsive" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="94d21bd6-94b1-4b7d-86b9-b3aa612d7d1d">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="192"/>
+	<property name="ireport.background.image.properties" value="true,true,0.25,-655,460,749,339,387,353"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="duracion" class="java.lang.String">
+		<fieldDescription><![CDATA[duracion]]></fieldDescription>
+	</field>
+	<field name="fechaFinEva" class="java.lang.String">
+		<fieldDescription><![CDATA[fechaFinEva]]></fieldDescription>
+	</field>
+	<field name="fechaInEva" class="java.lang.String">
+		<fieldDescription><![CDATA[fechaInEva]]></fieldDescription>
+	</field>
+	<field name="grupo" class="java.lang.String">
+		<fieldDescription><![CDATA[grupo]]></fieldDescription>
+	</field>
+	<field name="horaFinEva" class="java.lang.String">
+		<fieldDescription><![CDATA[horaFinEva]]></fieldDescription>
+	</field>
+	<field name="horaInEva" class="java.lang.String">
+		<fieldDescription><![CDATA[horaInEva]]></fieldDescription>
+	</field>
+	<field name="minAprob" class="java.lang.String">
+		<fieldDescription><![CDATA[minAprob]]></fieldDescription>
+	</field>
+	<field name="nombreCues" class="java.lang.String">
+		<fieldDescription><![CDATA[nombreCues]]></fieldDescription>
+	</field>
+	<field name="nombreEva" class="java.lang.String">
+		<fieldDescription><![CDATA[nombreEva]]></fieldDescription>
+	</field>
+	<field name="numEvaluados" class="java.lang.Integer">
+		<fieldDescription><![CDATA[numEvaluados]]></fieldDescription>
+	</field>
+	<field name="sede" class="java.lang.String">
+		<fieldDescription><![CDATA[sede]]></fieldDescription>
+	</field>
+	<field name="user" class="java.lang.String">
+		<fieldDescription><![CDATA[user]]></fieldDescription>
+	</field>
+	<background>
+		<band height="361" splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="115" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="5a7d8c04-7870-41c1-910b-cf56b0fec670" x="140" y="54" width="415" height="36"/>
+				<textElement>
+					<font size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Responsiva de Evaluacion]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement uuid="86e25a21-4e3c-463f-8f19-8421ebc72253" x="455" y="24" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="592" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="9cf441c1-3f51-4a81-be25-1425f0a7f971" x="0" y="36" width="221" height="31"/>
+				<textElement>
+					<font size="15" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Nombre Evaluacion :]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="95e9d529-8020-4f98-84cb-97f89f5102f6" x="246" y="36" width="149" height="31"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nombreEva}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="34853eff-b2e3-43d8-a4eb-2ebb69ce9ba0" x="246" y="98" width="149" height="31"/>
+				<textElement>
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{user}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="e1ed0cfd-9f13-4ad6-b93b-3dffe3b94258" x="246" y="143" width="149" height="31"/>
+				<textElement>
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fechaInEva}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="ace9665d-53f0-42c7-984f-3d1fc21dc8b4" x="246" y="188" width="149" height="31"/>
+				<textElement>
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fechaFinEva}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="2b232eca-4914-444b-83f3-bbbc12088fa9" x="246" y="321" width="149" height="31"/>
+				<textElement>
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{grupo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="ab7df5b7-1eaf-4b94-a137-7f32a6a10f6b" x="246" y="357" width="149" height="31"/>
+				<textElement>
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{sede}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="98570148-76be-465c-a530-057a16fda3d7" x="246" y="231" width="149" height="31"/>
+				<textElement>
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{minAprob}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="6a66bebf-aefb-4f9e-8a3a-3ba886da0b0b" x="246" y="396" width="149" height="31"/>
+				<textElement>
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{numEvaluados}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="58710b68-2af6-4007-b345-e0e572f789aa" x="246" y="277" width="149" height="31"/>
+				<textElement>
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{duracion}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="f0b842b3-5caa-44f4-8413-e5da3d2602f6" x="177" y="542" width="195" height="20"/>
+				<textElement/>
+				<text><![CDATA[________________________________]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="5a5d4dbc-0c44-491b-80c8-301cdd46afce" x="246" y="562" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[Firma]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="4238187d-4b94-49a4-a47e-c36f2cbb06d8" x="0" y="98" width="221" height="31"/>
+				<textElement>
+					<font size="15" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Usuario :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="6e9be4b9-be92-430f-9858-8e8ed7ac82fe" x="0" y="143" width="221" height="31"/>
+				<textElement>
+					<font size="15" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Fecha y hora de inicio :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="941704ec-abee-43a0-ba46-09226384a632" x="0" y="188" width="221" height="31"/>
+				<textElement>
+					<font size="15" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Fecha y hora final :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="1c39a5b8-3c33-45c6-89b2-df9bc7ab21ab" x="0" y="231" width="221" height="31"/>
+				<textElement>
+					<font size="15" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Calificacion aprobatoria :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="f291ea6f-0468-426c-b717-46d68deb5cb4" x="0" y="277" width="221" height="31"/>
+				<textElement>
+					<font size="15" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Duracion :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="ade6ffb6-5668-4871-a16f-4e8926f057ec" x="0" y="321" width="221" height="31"/>
+				<textElement>
+					<font size="15" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Grupo :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="af96c9e9-0bc6-4dbf-9e35-50db073dc595" x="0" y="357" width="221" height="31"/>
+				<textElement>
+					<font size="15" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Sede :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="652bbcdf-d220-4c14-ae60-cd941263580e" x="0" y="396" width="221" height="31"/>
+				<textElement>
+					<font size="15" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Numero de participantes :]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="4b85ce92-e3bb-4d3e-b851-4e69d6f03597" x="108" y="110" width="1" height="1"/>
+			</line>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="79" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

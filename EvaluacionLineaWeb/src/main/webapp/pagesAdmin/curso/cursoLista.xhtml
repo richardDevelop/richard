@@ -1,0 +1,137 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:body>
+	<ui:composition template="/masterPage.xhtml">
+		<ui:define name="contenido">
+			<p:fieldset legend="Curso" style="margin-bottom:500px">
+				<p:panel>
+					<h:form id="formul">
+
+						<p:growl id="msgsC" showDetail="true" />
+						<table width="100%">
+							<tr>
+								<td width="50"><p:outputLabel for="area" value="Area:" /></td>
+								<td align="left"><p:selectOneMenu id="areaGral"
+										value="#{dtCursoView.areaGral}" style="width:20%">
+										<f:selectItem itemLabel="Selecciona" itemValue="" />
+										<f:selectItems value="#{MbAreas.listaAreas}" />
+										<p:ajax event="change" update="tblCurso" process="@this"
+											listener="#{dtCursoView.findCursosByArea()}" />
+									</p:selectOneMenu></td>
+							</tr>
+						</table>
+
+
+						<p:dataTable id="tblCurso" var="curso"
+							value="#{dtCursoView.lstCurso}" editable="true"
+							style="margin-bottom:20px" paginator="true" rows="10"
+							paginatorPosition="bottom">
+
+
+
+							<p:ajax event="rowEdit" listener="#{dtCursoView.onRowEdit}"
+								update=":formul:msgsC" />
+
+							<p:column headerText="Id">
+								<h:outputText value="#{curso.curId}" />
+							</p:column>
+
+							<p:column headerText="Nombre Curso">
+								<p:cellEditor>
+									<f:facet name="output">
+										<h:outputText value="#{curso.nombre}" />
+									</f:facet>
+									<f:facet name="input">
+										<p:inputText id="nombre" value="#{curso.nombre}"
+											style="width:100%" />
+									</f:facet>
+								</p:cellEditor>
+							</p:column>
+
+							<p:column headerText="Area">
+								<p:cellEditor>
+									<f:facet name="output">
+										<h:outputText value="#{curso.area}" />
+									</f:facet>
+									<f:facet name="input">
+										<p:selectOneMenu id="areaList" value="#{dtCursoView.areaTbl}"
+											style="width:100%">
+											<f:selectItem itemLabel="Selecciona" itemValue="" />
+											<f:selectItems value="#{MbAreas.listaAreas}" />
+
+										</p:selectOneMenu>
+									</f:facet>
+								</p:cellEditor>
+							</p:column>
+
+							<p:column headerText="Estatus">
+								<p:cellEditor>
+									<f:facet name="output">
+										<h:outputText value="#{curso.estatus}" />
+									</f:facet>
+									<f:facet name="input">
+
+										<p:selectOneMenu id="estatusLst"
+											value="#{dtCursoView.estatusTbl}" style="width:100%">
+											<f:selectItem itemLabel="Selecciona" itemValue="" />
+											<f:selectItems value="#{dtCursoView.lstEstatus}" />
+										</p:selectOneMenu>
+									</f:facet>
+								</p:cellEditor>
+							</p:column>
+							<p:column style="width:32px">
+								<p:rowEditor />
+							</p:column>
+						</p:dataTable>
+
+						<p:commandButton label="Nuevo" value="Nuevo"
+							oncomplete="PF('dlg').show()">
+						</p:commandButton>
+
+						<p:dialog header="Nuevo Curso" widgetVar="dlg" resizable="false">
+							<p:panel>
+								<h:panelGrid columns="2" cellpadding="5">
+									<h:outputLabel for="cursoNom" value="Nombre " />
+									<p:inputText id="cursoNom" required="true" label="curso"
+										value="#{dtCursoView.nombre}" style="width:80%" />
+
+									<h:outputLabel for="area" value="Area" />
+									<p:selectOneMenu id="area" value="#{dtCursoView.area}"
+										style="width:80%">
+										<f:selectItem itemLabel="Selecciona" itemValue="" />
+										<f:selectItems value="#{MbAreas.listaAreas}" />
+
+									</p:selectOneMenu>
+
+									<h:outputLabel for="activo" value="Activo" />
+									<p:selectOneMenu id="activo" value="#{dtCursoView.estatus}"
+										style="width:80%">
+										<f:selectItem itemLabel="Selecciona" itemValue="" />
+										<f:selectItems value="#{dtCursoView.lstEstatus}" />
+									</p:selectOneMenu>
+
+
+									<f:facet name="footer">
+										<p:commandButton value="Guardar" update="growl"
+											actionListener="#{dtCursoView.newCurso}" ajax="false" />
+									</f:facet>
+								</h:panelGrid>
+
+							</p:panel>
+						</p:dialog>
+					</h:form>
+
+
+				</p:panel>
+			</p:fieldset>
+		</ui:define>
+	</ui:composition>
+
+
+</h:body>
+</html>

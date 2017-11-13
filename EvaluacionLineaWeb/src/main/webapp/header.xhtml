@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<h:body>
+	<table id="main-header">
+		<tr>
+			<td>
+				<table>
+					<tr>
+						<td>
+							<a id="logo-header" href="#">
+								<span class="site-name">Vector</span>
+								<span class="site-desc">Sistema de Evaluación</span>
+							</a>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<h:form id="frmMenu">
+								<p:commandButton id="btnMenu" value="Menu" type="button" icon="ui-icon-extlink" />
+								<p:tieredMenu overlay="true" trigger="btnMenu" my="left top" at="left bottom" model="#{MbMenu.menu}"></p:tieredMenu>
+								<p:inputText id="txtMuestraMenu" value="#{MbMenu.mostrarMenu}" style="display:none"/>							
+							</h:form>
+							<script type="text/javascript" language="javascript">
+							    //$("#frmMenu\\:btnMuestra").click();
+							    if (document.getElementById("frmMenu:txtMuestraMenu").value != '') {
+							      document.getElementById("frmMenu:btnMenu").style.display = document.getElementById("frmMenu:txtMuestraMenu").value;
+								}							      
+							</script>
+						</td>
+					</tr>
+				</table>
+			</td>
+			<td align="right">
+				<p:growl id="msgs" showDetail="true" />
+				<h:outputLabel value="Usuario: "/>
+				<h:outputText value="#{MbSession.personaVO.nombre} (#{MbSession.personaVO.numEmpleado})"/>
+				<h:form>
+					<p:commandButton value="cerrar session" action="#{MbSession.cerrarSession}"/>
+				</h:form>
+			</td>
+		</tr>			
+	</table>	
+</h:body>
+</html>

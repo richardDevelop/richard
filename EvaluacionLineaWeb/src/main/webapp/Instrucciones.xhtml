@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+  	
+</h:head>
+<h:body>
+<ui:composition template="/masterPage.xhtml">
+		<ui:define name="contenido">
+				<style type="text/css">
+				.wideList .ui-orderlist .ui-orderlist-list{
+					border: none;
+				    width: 900px;
+				    height: 900px;
+				}
+				.nav {
+				  font-size: 1em;
+				  width: 40%;
+				  border: none;
+				  overflow: hidden;
+				 }
+			</style>
+			<div width="80%" align="center">
+				<div class="nav">
+<!-- 				     <h3 class="titulo3"> -->
+<!-- 				        Sistema de Evaluación -->
+<!-- 				     </h3> -->
+				     <!-- Formulario de selección de estilos -->
+				     <h:form id="frmIntrucciones" class="tip">
+
+				       <h1>Instrucciones</h1>
+				       <p:spacer height="30"/>
+						<p>
+							Contesta correctamente cada una de las preguntas de la siguiente evaluación, dando clic en la respuesta que creas sea la correcta. 
+							Recuerda que solo tienes un tiempo específico para poder completar toda tu evaluación.
+						</p>					
+							<p:spacer height="50"/>
+							<table>
+								<tr>
+									<td>
+										<h3 style="margin-top: 0">
+											<h:outputText value="#{mbCuestionario.labelIntrucciones}" />
+										</h3>
+									</td>
+								</tr>
+								<tr>
+									<td>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p:panel id="panb" widgetVar="panb">
+										<p:orderList id="layersList" value="#{mbCuestionario.lstEvaluacionByUsuId}"
+										              var="eva" itemValue="#{eva}" controlsLocation="none">
+											 <p:column style="display: none">
+											  <h:outputText value="#{eva.evaId}"/>
+											 </p:column>
+											 <p:column style="display: none">
+											  <h:outputText value="#{eva.cuestionario.cueId}"/>
+											 </p:column>
+											 <p:column style="width:100%">
+											  <h:outputText value="#{eva.cuestionario.nombre}"/>
+											 </p:column>
+											 <p:column style="width: 10%">
+											  <p:commandButton  widgetVar="btsig" id="btsig" onclick="PF('asd').show()" ajax="false" icon="ui-icon-arrowthick-1-e" actionListener="#{mbCuestionario.irEvaluacion}">
+											   <f:param name="evaId" value="#{eva.evaId}" />
+											   <f:param name="cueId" value="#{eva.cuestionario.cueId}" />
+											   <f:param name="contestada" value="#{eva.contestada}"/>											   
+											  </p:commandButton>
+											 </p:column>										 
+										</p:orderList>
+										</p:panel>
+										<p:blockUI block="panb" trigger="btsig" widgetVar="asd">										
+										        CARGANDO....<br />
+										        <p:graphicImage value="/loading/ajax-loader.gif"/>
+									    </p:blockUI>
+									</td>
+								</tr>
+							</table>												
+				     </h:form>
+				</div>
+			</div>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

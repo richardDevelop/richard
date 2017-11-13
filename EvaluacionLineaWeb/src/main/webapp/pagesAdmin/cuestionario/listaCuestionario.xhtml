@@ -1,0 +1,88 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:body>
+	<ui:composition template="/masterPage.xhtml">
+		<ui:define name="contenido">
+			<p:fieldset legend="Cuestionario" style="margin-bottom:500px">
+				<h:form id="formulario">
+					<p:growl id="msgs" showDetail="true" />
+
+
+
+					<table width="100%">
+						<tr>
+							<td width="50"><p:outputLabel for="area" value="Area:" /></td>
+							<td align="left"><p:selectOneMenu id="areaGral"
+									value="#{mbCuestionario.areaIdGral}" style="width:29%">
+									<f:selectItem itemLabel="Selecciona" itemValue="" />
+									<f:selectItems value="#{MbAreas.listaAreas}" />
+									<p:ajax event="change" update="tblCuest" process="@this"
+										listener="#{mbCuestionario.handleChangeAreaGral()}" />
+								</p:selectOneMenu></td>
+						</tr>
+					</table>
+					<p:dataTable id="tblCuest" var="cuest"
+						value="#{mbCuestionario.lstCuestionario}"
+						style="margin-bottom:20px" paginator="true"
+						paginatorPosition="bottom" rows="10">
+
+						<p:ajax event="rowEdit" listener="#{mbCuestionario.onRowEdit}"
+							update=":formulario:msgs" />
+						<p:ajax event="rowEditCancel"
+							listener="#{mbCuestionario.onRowCancel}"
+							update=":formulario:msgs" />
+
+						<p:column headerText="Id">
+							<h:outputText value="#{cuest.cueId}" />
+						</p:column>
+						<p:column headerText="Nombre Cuestionario">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{cuest.nombre}" />
+								</f:facet>
+								<f:facet name="input">
+									<p:inputText id="nombreC" value="#{cuest.nombre}"
+										style="width:100%" />
+								</f:facet>
+							</p:cellEditor>
+
+						</p:column>
+
+						<p:column headerText="Nombre Curso">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{cuest.curso.nombre}" />
+								</f:facet>
+								<f:facet name="input">
+									<p:inputText id="nombre" value="#{cuest.curso.nombre}"
+										style="width:100%" />
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+
+						<p:column headerText="Estatus">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{cuest.estatus}" />
+								</f:facet>
+								<f:facet name="input">
+									<p:selectOneMenu id="estatus" value="#{mbCuestionario.estatus}">
+										<f:selectItems value="#{mbCuestionario.estatus}" var="esta"
+											itemLabel="#{esta}" itemValue="#{esta}" />
+									</p:selectOneMenu>
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+					</p:dataTable>
+				</h:form>
+			</p:fieldset>
+		</ui:define>
+	</ui:composition>
+
+</h:body>
+</html>

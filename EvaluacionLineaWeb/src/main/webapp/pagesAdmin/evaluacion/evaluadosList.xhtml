@@ -1,0 +1,126 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<p:growl id="growl" life="2000" />
+</h:head>
+
+<h:body>
+	<p:layout fullPage="true">
+
+		<p:layoutUnit position="north" size="100" header="Menu"
+			resizable="false" closable="false" collapsible="false">
+			<ui:include src="./indexAdmin.xhtml" />
+		</p:layoutUnit>
+		<p:layoutUnit position="west" header="Nuevo" size="250"
+			resizable="false" closable="false" collapsible="false">
+			<h:form>
+				<p:menu id="menuEvaluacion" toggleable="true">
+					<p:submenu label="Evaluacion">
+						<p:menuitem value="Nueva Evaluacion" title="Nueva Evaluacion"
+							icon="ui-icon-arrowrefresh-1-w" onclick="PF('dlgEva').show();" />
+								<p:menuitem value="Lista Evaluados" title="Lista Evaluados"
+							icon="ui-icon-arrowrefresh-1-w" action="#{menuView.goPageEvaluacion(1)}"/>
+					</p:submenu>
+					<p:submenu id="userEv" label="Usuarios">
+						<p:menuitem value="Nuevo Usuario" title="Nuevo Usuario"
+							icon="ui-icon-arrowrefresh-1-w" onclick="PF('dlgEva').show();" />
+						<p:menuitem value="Cargar Usuarios" title="Cargar Usuarios"
+							icon="ui-icon-arrowrefresh-1-w" onclick="PF('dlgEva').show();" />
+						<p:menuitem value="Lista Usuarios" title="Lista Usuarios"
+							icon="ui-icon-arrowrefresh-1-w" onclick="PF('dlgEva').show();" />
+					</p:submenu>
+
+				</p:menu>
+
+			</h:form>
+		</p:layoutUnit>
+
+		<p:layoutUnit position="center">
+
+			<ui:include src="./listaEvaluados.xhtml"></ui:include>
+		</p:layoutUnit>
+
+	</p:layout>
+
+	<p:dialog header="Nuevo Evaluacion" widgetVar="dlgEva"
+		resizable="false">
+		<h:form>
+			<h:panelGrid columns="2" cellpadding="5">
+				<h:outputLabel for="area" value="Area" />
+				<p:selectOneMenu id="area" value="#{dtEvaluadosListView.areaId}"
+					style="width:80%">
+					<f:selectItem itemLabel="Selecciona" itemValue="" />
+					<f:selectItems value="#{dtCursoView.lstArea}" />
+					<p:ajax event="change" update="cuest" process="@this"
+						listener="#{dtEvaluadosListView.handleChange()}" />
+				</p:selectOneMenu>
+
+				<h:outputLabel for="cuest" value="Cuestionario" />
+				<p:selectOneMenu id="cuest" value="#{dtEvaluadosListView.cueId}"
+					style="width:80%">
+					<f:selectItem itemLabel="Selecciona" itemValue="" />
+					<f:selectItems value="#{dtEvaluadosListView.lstCuesItem}" />
+				</p:selectOneMenu>
+
+				<h:outputLabel for="cuestNom" value="Nombre " />
+				<p:inputText id="cuestNom" required="true" label="curso"
+					value="#{dtEvaluadosListView.evaluacion.nombre}" />
+
+				<h:outputLabel for="activo" value="Activo" />
+				<p:selectOneMenu id="activo" value="#{dtEvaluadosListView.estatus}"
+					style="width:80%">
+					<f:selectItem itemLabel="Selecciona" itemValue="" />
+					<f:selectItems value="#{dtEvaluadosListView.lstEstatus}" />
+				</p:selectOneMenu>
+
+				<h:outputLabel for="sedeEv" value="Sede " />
+				<p:inputText id="sedeEv" required="true"
+					value="#{dtEvaluadosListView.evaluacion.sede}" />
+
+				<h:outputLabel for="gpo" value="Grupo " />
+				<p:inputText id="gpo" required="true"
+					value="#{dtEvaluadosListView.evaluacion.grupo}" />
+
+				<p:outputLabel for="time" value="Duracion " />
+				<p:calendar id="time" pattern="HH:mm" timeOnly="true"
+					value="#{dtEvaluadosListView.evaluacion.duracion}" />
+
+				<h:outputLabel for="numPre" value="Num Preguntas " />
+				<p:inputText id="numPre" required="true"
+					value="#{dtEvaluadosListView.evaluacion.numPreguntas}" />
+
+				<h:outputLabel for="valResp" value="Valor Respuestas " />
+				<p:inputText id="valResp" required="true"
+					value="#{dtEvaluadosListView.evaluacion.valorRespuesta}" />
+
+				<p:outputLabel for="fechAp" value="Fecha Aplicacion" />
+				<p:calendar id="fechAp"
+					value="#{dtEvaluadosListView.evaluacion.inFechAp}" />
+
+				<h:outputLabel for="horaAplicacion" value="Hora Aplicacion" />
+				<p:inputText id="horaAplicacion" required="true"
+					value="#{dtEvaluadosListView.evaluacion.hrApIni}" />
+
+				<p:outputLabel for="fechApFin" value="Fecha Aplicacion Final" />
+				<p:calendar id="fechApFin"
+					value="#{dtEvaluadosListView.evaluacion.finFechAp}" />
+
+				<h:outputLabel for="horaAplicacionF" value="Hora Aplicacion Final" />
+				<p:inputText id="horaAplicacionF" required="true"
+					value="#{dtEvaluadosListView.evaluacion.hrApFin}" />
+
+				<f:facet name="footer">
+					<p:commandButton value="Guardar" update="growl" ajax="false"
+						actionListener="#{dtEvaluadosListView.saveEvaluacion}" />
+				</f:facet>
+
+			</h:panelGrid>
+		</h:form>
+	</p:dialog>
+</h:body>
+</html>

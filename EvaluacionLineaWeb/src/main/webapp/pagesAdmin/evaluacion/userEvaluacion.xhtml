@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+
+
+<h:body>
+	<ui:composition template="/masterPage.xhtml">
+		<ui:define name="contenido">
+		<p:fieldset legend="Usuarios" style="margin-bottom:500px">
+<h:form>
+ <p:dataTable id="tblusuario" var="usuario"
+		value="#{mbUsuarios.lstPersona}" paginator="true" rows="10"
+		style="margin-bottom:20px"
+		paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}">
+		<f:facet name="{Exporters}">
+			<h:commandLink>
+				<p:graphicImage name="../img/cvs.jpg" width="24" />
+				<p:dataExporter type="csv" target="tblusuario" fileName="usuarios"
+					pageOnly="false" />
+			</h:commandLink>
+		</f:facet>
+		<p:column headerText="Nombre">
+		<p:cellEditor>
+			<f:facet name="output">
+				<h:outputText value="#{usuario.nombre}" />
+			</f:facet>
+			<f:facet name="input">
+			<h:inputText id="nomUsu" value="#{usuario.nombre}" />
+			</f:facet>
+			</p:cellEditor>
+		</p:column>
+		
+			<p:column headerText="Correo">
+			<p:cellEditor>
+				<f:facet name="output">
+					<h:outputText value="#{usuario.email}" />
+				</f:facet>
+				<f:facet name="input">
+					<h:inputText id="mail" value="#{usuario.email}" />
+				</f:facet>
+			</p:cellEditor>
+		</p:column>
+
+		<p:column headerText="Passwoord">
+			<p:cellEditor>
+				<f:facet name="output">
+					<h:outputText value="#{usuario.users.password}" />
+				</f:facet>
+				<f:facet name="input">
+					<h:inputText id="pass" value="#{usuario.users.password}" />
+				</f:facet>
+			</p:cellEditor>
+		</p:column>
+
+		<p:column headerText="GPN">
+			<p:cellEditor>
+				<f:facet name="output">
+					<h:outputText value="#{usuario.numEmpleado}" />
+				</f:facet>
+				<f:facet name="input">
+					<h:inputText id="gpn" value="#{usuario.numEmpleado}" />
+				</f:facet>
+			</p:cellEditor>
+		</p:column>
+	
+
+		<p:column headerText="Estatus">
+			<p:cellEditor>
+				<f:facet name="output">
+					<p:selectBooleanCheckbox id="usero"  
+					           value="#{usuario.activo}" style="width:10px"/> 
+				</f:facet>
+				<f:facet name="input">
+					<p:selectBooleanCheckbox id="user"  
+					           value="#{usuario.activo}" style="width:10px"/>
+					
+				</f:facet>
+			</p:cellEditor>
+		</p:column>
+	
+	</p:dataTable>
+	<p:commandButton label="Responsiva" value="Responsiva" ajax="false"
+						actionListener="#{mbUsuarios.generatePdf}" />
+						
+	</h:form>
+	</p:fieldset>
+	</ui:define>
+	</ui:composition>
+</h:body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:form>
+
+
+	<p:dataTable id="tblEvaluado" var="evaluado"
+		value="#{dtEvaluadosListView.lstEvaluados}" paginator="true" rows="10"
+		style="margin-bottom:20px"
+		paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}">
+		<f:facet name="{Exporters}">
+			<h:commandLink >
+				<p:graphicImage name="./cvs.jpg" width="24"/>
+				<p:dataExporter type="csv" target="tblEvaluado" fileName="Evaluados"
+					pageOnly="false" />
+			</h:commandLink>
+		</f:facet>
+		<p:column>
+			<f:facet name="header">
+				<h:outputText value="Nombre" />
+			</f:facet>
+			<h:outputText value="#{evaluado.nombre}" />
+		</p:column>
+
+		<p:column>
+			<f:facet name="header">
+				<h:outputText value="Apellido Paterno" />
+			</f:facet>
+			<h:outputText value="#{evaluado.apellidoPaterno}" />
+		</p:column>
+
+		<p:column>
+			<f:facet name="header">
+				<h:outputText value="Apellido Mat" />
+			</f:facet>
+			<h:outputText value="#{evaluado.apellidoMaterno}" />
+		</p:column>
+
+		<p:column>
+			<f:facet name="header">
+				<h:outputText value="GPN" />
+			</f:facet>
+			<h:outputText value="#{evaluado.numEmpleado}" />
+		</p:column>
+		<p:column>
+			<f:facet name="header">
+				<h:outputText value="Correo" />
+			</f:facet>
+			<h:outputText value="#{evaluado.mail}" />
+		</p:column>
+
+		<p:column>
+			<f:facet name="header">
+				<h:outputText value="Evaluacion" />
+			</f:facet>
+			<h:outputText
+				rendered="#{evaluado.evaluacion ? 'Aprobo' : 'No Aprobo'}" />
+		</p:column>
+
+		<p:column>
+			<f:facet name="header">
+				<h:outputText value="Calificacion" />
+			</f:facet>
+			<h:outputText value="#{evaluado.calificacion}" />
+		</p:column>
+
+		<p:column>
+			<f:facet name="header">
+				<h:outputText value="Tiempo" />
+			</f:facet>
+			<h:outputText value="#{evaluado.hora}" />
+		</p:column>
+		<p:column>
+			<f:facet name="header">
+				<h:outputText value="Fecha" />
+			</f:facet>
+			<h:outputText value="#{evaluado.fecha}" />
+		</p:column>
+
+		<p:column>
+			<f:facet name="header">
+				<h:outputText value="Ip" />
+			</f:facet>
+			<h:outputText value="#{evaluado.ipHost}" />
+		</p:column>
+	</p:dataTable>
+
+</h:form>
+
+</html>

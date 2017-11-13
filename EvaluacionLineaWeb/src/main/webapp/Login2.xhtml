@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+    <h:head>
+        <title>Vector</title>
+        <link rel="stylesheet" href="/EvaluacionLineaWeb/css/cssLogin2.css" />
+    </h:head>
+    <h:body>
+    	<section class="contenedorLogin">
+	    	<h:form class="formulario">
+	    		<h2>Acceso de usuario</h2>
+	    		<p>Complete los siguientes campos para ingresar al sistema</p>
+	    		<table>
+	    			<tr>
+	    				<td>
+	    					<p><h:outputLabel for="usuario" value="Usuario:"/></p>
+	    				</td>
+	    				<td><p:inputText id="usuario" value="#{MbLogin.usuario}" required="true" label="usuario"/></td>
+	    			</tr>
+	    			<tr>
+	    				<td>
+	    					<p>
+	    						<h:outputLabel for="password" value="Clave:"/>
+	    					</p>
+	    				</td>
+	    				<td><p:password id="password" value="#{MbLogin.passowrd}" required="true" label="password"/></td>
+	    			</tr>
+	    		</table>	    		
+	    		<h:messages infoStyle="color:blue;list-styule:none;" errorStyle="color:red;list-styule:none;"/>
+	    		<section class="seccionBotones">
+	    			<h:commandButton value="Entrar" action="#{MbLogin.login()}"/>
+	    		</section>    		
+	    	</h:form>
+    	</section>  
+    </h:body>
+</html>

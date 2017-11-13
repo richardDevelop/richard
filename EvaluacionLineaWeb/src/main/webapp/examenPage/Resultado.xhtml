@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+	<h:head>
+        <title>Resultado</title>
+        <link rel="stylesheet" href="Examen.css" />
+    </h:head>
+	<h:body>
+	     <ui:composition template="../masterPage.xhtml">
+          <ui:define name="contenido">
+	
+		<p:fieldset legend="Resultado" style="margin-bottom:20px">
+	        <h:panelGrid columns="2" cellpadding="5">
+	        	<h:panelGrid columns="2">
+		        	<p:outputLabel>Nombre</p:outputLabel>
+		        	<p:outputLabel value="#{mbResultado.nombre}" />
+		        	
+		        	<p:outputLabel>Curso</p:outputLabel>
+		        	<p:outputLabel value="#{mbResultado.cuestionarioVO.curso.descripcion}" />
+		        	
+		        	<p:outputLabel>Cuestionario</p:outputLabel>
+		        	<p:outputLabel value="#{mbResultado.cuestionarioVO.descripcion}" />
+		        	
+		        	<p:outputLabel>Preguntas Correctas</p:outputLabel>
+		        	<p:outputLabel value="#{mbResultado.pregVal}" />
+	        	</h:panelGrid>
+	        	<h:panelGrid columns="1">
+	        		<p:outputLabel><h1>Resultado</h1></p:outputLabel>
+		        	<p:outputLabel value="#{mbResultado.promedio}" />
+	        	</h:panelGrid>
+	        </h:panelGrid>
+	        <h:form>
+		        <p:commandButton value="Mostrar Evaluacion" disabled="#{mbResultado.enableShowPdf}"   
+		        actionListener="#{mbResultado.showPdf}"/>
+			</h:form>
+	     	
+	    </p:fieldset>
+	    
+		
+	    </ui:define>
+     </ui:composition>
+	    
+	</h:body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Administrador</title>
+</h:head>
+
+<h:body>
+	<h:form>
+
+		<p:menubar>
+		<p:menuitem title="Inicio" value="Inicio" icon="ui-icon-document"
+				action="#{menuView.doPage(1)}" />
+			<p:menuitem title="Cursos" value="Cursos" icon="ui-icon-document"
+				action="#{menuView.doPage(2)}" />
+			<p:menuitem label="Cuestionarios" value="Cuestionarios"
+				action="#{menuView.doPage(3)}" icon="ui-icon-pencil" />
+			<p:menuitem label="Evaluaciones" value="Evaluaciones"
+				action="#{menuView.doPage(4)}" icon="ui-icon-help" />
+		</p:menubar>
+
+	</h:form>
+</h:body>
+</html>

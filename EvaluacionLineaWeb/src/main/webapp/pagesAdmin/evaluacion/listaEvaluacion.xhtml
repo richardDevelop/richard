@@ -1,0 +1,105 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:form>
+
+
+	<p:dataTable id="tblevaluacion" var="ev"
+		value="#{dtEvaluadosListView.lstEvaluacion}" paginator="true" rows="10"
+		style="margin-bottom:20px" paginatorPosition="bottom"
+		paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}">
+		<f:facet name="{Exporters}">
+			<h:commandLink >
+				<p:graphicImage name="./cvs.jpg" width="24"/>
+				<p:dataExporter type="csv" target="tblEvaluado" fileName="Evaluados"
+					pageOnly="false" />
+			</h:commandLink>
+		</f:facet>
+		<p:column>
+			<f:facet name="header">
+				<h:outputText value="ID" />
+			</f:facet>
+			<h:outputText value="#{ev.evaId}" />
+		</p:column>
+
+		<p:column>
+			<f:facet name="header">
+				<h:outputText value="Nombre" />
+			</f:facet>
+			<h:outputText value="#{ev.nombre}" />
+		</p:column>
+
+
+		<p:column>
+			<f:facet name="header">
+				<h:outputText value="Estatus" />
+			</f:facet>
+			<h:outputText value="#{ev.estatus}" />
+		</p:column>
+		<p:column>
+			<f:facet name="header">
+				<h:outputText value="Sede" />
+			</f:facet>
+			<h:outputText value="#{ev.sede}" />
+		</p:column>
+
+		<p:column>
+			<f:facet name="header">
+				<h:outputText value="Grupo" />
+			</f:facet>
+			<h:outputText value="#{ev.grupo}" />
+		</p:column>
+
+		<p:column>
+			<f:facet name="header">
+				<h:outputText value="Duracion" />
+			</f:facet>
+			<h:outputText value="#{ev.duracionMin}" />
+		</p:column>
+
+		<p:column>
+			<f:facet name="header">
+				<h:outputText value="Numero preguntas" />
+			</f:facet>
+			<h:outputText value="#{ev.numPreguntas}" />
+		</p:column>
+		<p:column>
+			<f:facet name="header">
+				<h:outputText value="Valor Respuestas" />
+			</f:facet>
+			<h:outputText value="#{ev.valorRespuesta}" />
+		</p:column>
+
+		<p:column>
+			<f:facet name="header">
+				<h:outputText value="Fecha Aplicacion" />
+			</f:facet>
+			<h:outputText value="#{ev.fecApIni}" />
+		</p:column>
+			<p:column>
+			<f:facet name="header">
+				<h:outputText value="Hora Aplicacion" />
+			</f:facet>
+			<h:outputText value="#{ev.hrApIni}" />
+		</p:column>
+				<p:column>
+			<f:facet name="header">
+				<h:outputText value="Fecha Aplicacion Final" />
+			</f:facet>
+			<h:outputText value="#{ev.fecApIni}" />
+		</p:column>
+				
+				<p:column>
+			<f:facet name="header">
+				<h:outputText value="Hora Aplicacion Final" />
+			</f:facet>
+			<h:outputText value="#{ev.hrApFin}" />
+		</p:column>
+	</p:dataTable>
+
+</h:form>
+
+</html>

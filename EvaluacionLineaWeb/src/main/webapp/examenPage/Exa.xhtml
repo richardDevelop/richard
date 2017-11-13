@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions" >	
+	
+<h:head>
+  	<link rel="stylesheet" href="/EvaluacionLineaWeb/css/style.css" />
+ </h:head>
+<h:body>
+	
+<!-- 	<ui:composition template="/masterPage.xhtml"> -->
+<!-- 		<ui:define name="contenido"> -->
+			<p:growl autoUpdate="true"/>
+			<h:form class = "headExa" styleClass="headExa" id="headT">
+				<p:fieldset  legend="#{mbExamen.bloque}">
+					<h:panelGroup width="100%" >				
+						<table width="100%" >
+							<tr>
+								<td align="left" width="33%">
+									<h:outputText value="#{mbExamen.labeltLimit}" />
+								</td>
+								<td align="center" width="33%">
+										<h:outputLabel value="Usuario: "/>
+										<h:outputText value="#{MbSession.personaVO.nombre} (#{MbSession.personaVO.numEmpleado})"/>
+								</td>
+								<td align="right" width="33%">
+									<h:outputText value="#{mbExamen.labelTTrans}"/>								    
+								</td>
+							</tr>
+							<tr>
+								<td align="left">
+									<pe:timer  timeout="#{mbExamen.timeCue}" listener="#{mbExamen.onTimeout}" format="HH:mm:ss" value="Modal" visible="#{!mbExamen.isExpositor}"/>
+								</td>
+								<td>
+								</td>
+								<td align="right">
+									<pe:timer  timeout="1000000" forward="true" format="HH:mm:ss" visible="#{!mbExamen.isExpositor}"/>
+								</td>
+							</tr>
+						</table>
+					</h:panelGroup>
+				</p:fieldset>
+			</h:form>
+			<h:form id="eval" class= "cont" styleClass="cont">
+			<p:remoteCommand id="rc" update="headT"/>
+					<ui:repeat var="pre" value="#{mbExamen.preguntas}" varStatus="i">
+						<p:panelGrid columns="1" layout="grid"> 
+							<p><h:outputText value=" #{i.index +1 + mbExamen.noPreguntaActual}.-  #{pre.pregunta}"/></p>
+								<p:selectOneRadio id="selectRadio" value="#{pre.contestoVO.resId}" layout="grid" columns="1" required="true" styleClass="selectRadio">
+						            <f:selectItems value="#{pre.respuestasVO}" var="c" itemLabel="#{c.orden}) #{c.respuesta}" itemValue="#{c.respId}"/>
+						        </p:selectOneRadio>
+						</p:panelGrid>
+					</ui:repeat>
+					<p:panel id="panb" widgetVar="panb">
+						<p:commandButton  widgetVar="btsig" id="btsig" value="#{mbExamen.buttonLabel}" update="eval"  actionListener="#{mbExamen.saveContesto}" icon="ui-icon-disk" 
+						onclick="PF('asd').show()" ajax="false"/>
+					</p:panel>
+			<p:blockUI block="panb" trigger="btsig" widgetVar="asd"/>
+			</h:form>
+<!-- 		</ui:define> -->
+<!-- 	</ui:composition> -->
+</h:body>
+</html>

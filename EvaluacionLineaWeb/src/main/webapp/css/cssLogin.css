@@ -1,0 +1,108 @@
+@charset "utf-8";		
+ body {		
+		width: 53%;
+		margin: 0px auto;
+		background-color: #DDDDDD;
+	}
+	#login_form {
+
+	}
+
+	#f1 {
+		background-color: #F0F0F0;		
+		border-top: 1px solid #DDDDDD;
+		border-bottom: 1px double #DDDDDD;
+		height: 170px;
+		color:#646464;
+		font-family: times, serif; 
+		font-size:14pt; 
+		font-style:italic; 
+		font-weight: bold;
+	}
+	.f1_label {
+		white-space: nowrap;
+	}
+	
+	.f1 input[type=submit]
+	{
+	    background-color: #9A9384;
+	    border: none;
+	    border-radius: 2px;
+	    box-shadow: 0px 0px 2px rgba(253, 212, 84, 1), 0px 0px 2px white inset;
+	    color: #FFFFFF;
+	    font-size: 17px;
+	    height: 35px;
+	    margin: 4px;
+	    min-width: 100px;
+	    -webkit-transition: background-color 0.2s;
+	    -moz-transition: background-color 0.2s;
+	    -ms-transition: background-color 0.2s;
+	    -o-transition: background-color 0.2s;
+	    transition: background-color 0.2s;
+	}
+	.f1 input[type=submit]:hover
+	{
+	    background-color: #FDD454;
+	    cursor: pointer;
+	}
+	  
+	.f1 input[type=submit]:focus
+	{
+	    outline: none;
+	}
+	  
+	.f1 input[type=text], .f1 input[type=<span id="IL_AD11" class="IL_AD">password</span>]
+	{
+	    border: none;
+	    border-radius: 4px;
+	    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2) inset, -1px -1px 1px rgba(0, 0, 0, 0.1) inset, 0px 0px 2px white;
+	    height: 30px;
+	    margin: 0px;
+	    min-width: 240px;
+	    padding: 5px;
+	}
+	  
+	.f1 input[type=text]:focus, .f1 input[type=password]:focus
+	{
+	    outline: none;
+	}
+	  
+	.f1 input[type=text]:hover, .formulario input[type=password]:hover
+	{
+	    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2) inset, -1px -1px 1px rgba(0, 0, 0, 0.1) inset, 0px 0px 2px white, 0px 0px 2px rgba(0, 0, 0, 0.2);
+	}
+	
+	span {color: white;}
+
+	.div1 {
+		background-color: #FFFFFF;	
+		width: 1500px;
+		height: 150px;
+		text-align: right;
+		color:#969696;
+		font-size:30px;
+		display: table-cell;
+		vertical-align: bottom;
+		
+	}
+	.div2 {
+		background-image: url('../img/imagen-slider-01.jpg');
+		text-align: center;
+		height: 276px;
+	}
+	.div3 {
+		background-color: #FFFFFF;	
+		height: 30px;
+	}
+	.div4 {
+		background-color: #FFFFFF;	
+		height: 200px;
+		display: table-cell;
+		vertical-align: middle;
+		border-bottom: 1px double #DDDDDD;
+	}
+	.div5 {
+		background-image: url('../img/imagen-slider-04.jpg');
+		background-color: #FFFFFF;	
+		height: 22px;
+	}	
