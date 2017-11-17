@@ -1,0 +1,52 @@
+.titulo3 {
+  background-color: #333333;/*#B8C811;*/
+  color: white;
+  text-align: center;
+  font-weight: bold;
+  font-size: 1em;
+  text-transform: uppercase;
+}
+
+
+.nav {
+  border-radius: 20px;
+  
+  margin: 0.5em 0 0 0;
+  padding: 0;
+  width: 50%;
+  border: none;
+  overflow: hidden;
+ }
+
+.nav h3 {
+  width: auto;
+  margin-top: 1.25em;
+  margin-bottom: 0;
+  padding-bottom: 0.25em;
+}
+
+.nav h3.titulo3:before {
+  
+  margin-bottom: 10px;
+  display: block;  
+  content: url('/aii/images/izq3.png');  
+  font-size: 1px;
+}
+
+.nav p {
+  font-size: 1.5em;
+  text-align: justify;
+  margin: 0 auto;
+  width: 80%;
+}
+
+.nav form {
+  margin: 0;
+}
+
+.tip {
+  background-color: #FEEEBD;/*#E6EFE6;*/
+  color: rgb(0,0,0);
+  width: auto;
+  padding: 0.35em;
+}

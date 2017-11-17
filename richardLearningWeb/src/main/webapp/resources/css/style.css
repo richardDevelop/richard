@@ -1,0 +1,112 @@
+body {
+	margin: 0;
+	padding: 0;
+	font-family: Helvetica, Arial, sans-serif;
+	color: #666;
+	background: #f2f2f2; 
+	font-size: 1em;
+	line-height: 1.5em;
+	
+	/*padding-top: 80px; Relleno superior igual a la altura de la cabecera*/
+}
+
+#main-header {
+	background: #333;
+	color: white;
+	height: 80px;
+	
+	width: 100%; /* hacemos que la cabecera ocupe el ancho completo de la página */
+	left: 0; /* Posicionamos la cabecera al lado izquierdo */
+	top: 0; /* Posicionamos la cabecera pegada arriba */
+	/* position: fixed; Hacemos que la cabecera tenga una posición fija */
+}	
+	#main-header a {
+		color: white;
+	}
+ 
+/*
+ * Logo
+ */
+#logo-header {
+	float: left;
+	padding: 5px 20px 0 20px;
+	text-decoration: none;
+}
+	#logo-header:hover {
+		color: #0b76a6;
+	}
+	
+	#logo-header .site-name {
+		display: block;
+		font: oblique 120% sans-serif bold;/*oblique bold 120% cursive;*/
+		font-weight: 700;
+		font-size: 3.2em;
+	}
+	
+	#logo-header .site-desc {
+		display: block;
+		font-weight: 300;
+		font-size: 0.8em;
+		color: #999;
+	}	
+
+#main-content {
+	background: white;
+	width: 95%; /* separación entre la ventana y la pagina */
+	max-width: 98%; /* separación entre la pagina y el body */
+	margin: 0px auto; /* margen entre el header y el inicio de la pagina*/
+	box-shadow: 0 0 10px rgba(0,0,0,.1);
+	padding: 10px 20px 50px;
+}
+ 
+	#main-header {
+		padding: 5px/* margen entre el inicio de la pagia y el body */
+	}
+
+#main-footer {
+	background: #333;
+	color: white;
+	text-align: center;
+	padding: 20px;
+	margin-top: 30px;
+}
+	#main-footer p {
+		margin: 0;
+	}
+	
+	#main-footer a {
+		color: white;
+	}
+	
+.headExa {
+/*   background: rgba(0,0,0,0.9); */
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  position: fixed;
+  z-index: 100;
+}
+
+.cont{
+   padding: 0;
+   margin: 0;
+   padding-top: 150px;
+   width: 95%;
+   margin: auto;
+   overflow:hidden;
+}
+
+/* .ui-menubar,.ui-menu-child,.ui-menu { */
+/*     background: #004e8e !important; */
+/* } */
+
+#navigation .current-menu-item a {
+	background-image: none;
+	background-color: #FFF;
+	color: #1F6684;
+}
+
+#navigation .current-menu-item a:hover {
+	color: #1F6684;
+}
+

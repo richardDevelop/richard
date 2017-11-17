@@ -1,0 +1,74 @@
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	<h:head>
+		<title>Richard Learning</title>
+		<h:outputStylesheet library="css" name="cssLogin.css"  />
+	  	<div class="div1"  style="width : 100%; height: 7%;">
+		<h:graphicImage library = "img" name ="logo.png" style="width : 12%; height: 100%;"/>
+			</div>
+		</h:head>
+	<h:body  >
+
+		<font color="red"> <h:outputLabel
+				value="${SPRING_SECURITY_LAST_EXCEPTION.message}" /> </font>
+				
+				
+		<div id="login_form">
+		
+		
+			<div class="div2">
+			
+			</div>
+			<div class="div3"></div>
+			<form action="${request.contextPath}/appLogin" method="post"
+				class="loginForm" name="loginForm" id="loginForm">
+				<table>
+					<tr>
+						<td class="loginForm_label">
+							<p>
+								<h:outputLabel value="Enter UserName:" />
+							</p>
+						</td>
+						<td>
+							<input type="text" name="app_username" />
+						</td>
+						<td></td>
+						<td></td>
+					</tr>
+
+					<tr>
+						<td class="loginForm_label">
+							<p>
+								<h:outputLabel value="Enter Password:" />
+							</p>
+						</td>
+						<td>
+							<input type="password" name="app_password" />
+						</td>
+						<td></td>
+						<td>
+
+							<input type="submit" value="Login" />
+							<input type="hidden" name="${_csrf.parameterName}"
+								value="${_csrf.token}" />
+
+						</td>
+					</tr>
+				</table>
+
+
+
+			</form>
+		</div>
+
+
+<footer>
+<div class="footer">
+		<h:graphicImage library = "img" name ="logo2.png" style="width : 12%; height: 100%;"/>
+		</div>
+</footer>
+		
+	</h:body>
+</html>

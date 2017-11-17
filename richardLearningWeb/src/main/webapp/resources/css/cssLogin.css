@@ -1,0 +1,115 @@
+@charset "utf-8";		
+ body {		
+		width: 100%;
+		margin: 0px auto;
+		background-color: #ffe0cc;
+	}
+	#login_form {
+
+	}
+
+	#loginForm {
+		background-color: #ff944d;
+		border-top: 1px solid #DDDDDD;
+		border-bottom: 1px double #DDDDDD;
+		height: 170px;
+		color:#646464;
+		font-family: times, serif; 
+		font-size:14pt; 
+		font-style:italic; 
+		font-weight: bold;
+	}
+	.loginForm_label {
+		white-space: nowrap;
+	}
+	
+	.loginForm input[type=submit]
+	{
+	    background-color: #F0F0F0;
+	    border: none;
+	    border-radius: 2px;
+	    box-shadow: 0px 0px 2px rgba(253, 212, 84, 1), 0px 0px 2px white inset;
+	    color: #FFFFFF;
+	    font-size: 17px;
+	    height: 35px;
+	    margin: 4px;
+	    min-width: 100px;
+	    -webkit-transition: background-color 0.2s;
+	    -moz-transition: background-color 0.2s;
+	    -ms-transition: background-color 0.2s;
+	    -o-transition: background-color 0.2s;
+	    transition: background-color 0.2s;
+	}
+	.loginForm input[type=submit]:hover
+	{
+	    background-color: #FDD454;
+	    cursor: pointer;
+	}
+	  
+	.loginForm input[type=submit]:focus
+	{
+	    outline: none;
+	}
+	  
+	.loginForm input[type=text], .loginForm input[type=<span id="IL_AD11" class="IL_AD">password</span>]
+	{
+	    border: none;
+	    border-radius: 4px;
+	    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2) inset, -1px -1px 1px rgba(0, 0, 0, 0.1) inset, 0px 0px 2px white;
+	    height: 30px;
+	    margin: 0px;
+	    min-width: 240px;
+	    padding: 5px;
+	}
+	  
+	.loginForm input[type=text]:focus, .loginForm input[type=password]:focus
+	{
+	    outline: none;
+	}
+	  
+	.loginForm input[type=text]:hover, .formulario input[type=password]:hover
+	{
+	    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2) inset, -1px -1px 1px rgba(0, 0, 0, 0.1) inset, 0px 0px 2px white, 0px 0px 2px rgba(0, 0, 0, 0.2);
+	}
+	
+	span {color: white;}
+
+	.div1 {
+		background-color: #000000;	
+		width: 100%;
+		height: 15%;
+		text-align: left;
+		color:#969696;
+		font-size:30px;
+		vertical-align: bottom;
+		
+	}
+	.div2 {
+		text-align: center;
+		height: 276px;
+	}
+	.div3 {
+		background-color: #FFFFFF;	
+		height: 30px;
+	}
+	.div4 {
+		background-color: #FFFFFF;	
+		height: 200px;
+		display: table-cell;
+		vertical-align: middle;
+		border-bottom: 1px double #DDDDDD;
+	}
+	.div5 {
+		background-image: url('/javax.faces.resources/img/imagen-slider-04.jpg');
+		background-color: #FFFFFF;	
+		height: 22px;
+	}	
+	
+	.footer {
+		background-color: #000000;	
+		width: 100%;
+		height: 15%;
+		text-align: left;
+		color:#969696;
+		font-size:30px;
+	}
